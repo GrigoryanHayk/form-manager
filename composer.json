@@ -1,0 +1,17 @@
+{
+    "name": "safan-lab/form-manager",
+    "type": "library",
+    "description": "Form Manager",
+    "keywords": ["form", "form-manager"],
+    "homepage": "http://www.safanlab.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hayk Grigoryan",
+            "homepage": "http://www.safanlab.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    }
+}
