@@ -1,6 +1,6 @@
 Form Manager
 ===============
-Form Manager for managing and building forms
+Form Manager for managing and building forms in Safan Framework.
 
 REQUIREMENTS
 ------------
