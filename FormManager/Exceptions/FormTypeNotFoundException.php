@@ -7,4 +7,4 @@
  */
 namespace FormManager\Exceptions;
 
-class FormTypeNotFound extends \RuntimeException {}
+class FormTypeNotFoundException extends \RuntimeException {}

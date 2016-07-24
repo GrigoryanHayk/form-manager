@@ -7,8 +7,6 @@
  */
 namespace FormManager;
 
-use FormManager\Builder\FormBuilder;
-use FormManager\View\FormView;
 use Safan\Safan;
 
 class FormManager
@@ -21,8 +19,7 @@ class FormManager
     private $dataMapper;
 
     /**
-     * @param $params
-     * @throws Exceptions\FormNotFound
+     * @param array $params
      */
     public function init($params = [])
     {

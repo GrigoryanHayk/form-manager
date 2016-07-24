@@ -9,7 +9,6 @@ namespace FormManager\View;
 
 use FormManager\Exceptions\FormNameNotFoundException;
 use FormManager\View\Helpers\MainHelper;
-use Safan\Safan;
 
 class FormView implements FormViewInterface {
 
@@ -34,9 +33,21 @@ class FormView implements FormViewInterface {
     const CRITERIA_REQUIRED = 'required';
     const CRITERIA_DISABLED = 'disabled';
 
-
+    /**
+     * @var array
+     */
+    private $errorMessages = [];
+    /**
+     * @var array
+     */
+    private $postData = [];
+    /**
+     * @var
+     */
     private $formName;
-
+    /**
+     * @var array
+     */
     private $enctypes = [
         'text/plain',
         'application/x-www-form-urlencoded',
@@ -51,6 +62,37 @@ class FormView implements FormViewInterface {
             throw new FormNameNotFoundException('The Form View Has Dependency of formName for settings');
     }
 
+    /**
+     * @param array $errorMessages
+     */
+    public function setFormErrors($errorMessages = []) {
+        $this->errorMessages = $errorMessages;
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrorMessages() {
+        return $this->errorMessages;
+    }
+
+    /**
+     * @param $postData
+     */
+    public function setPostData($postData) {
+        $this->postData = $postData;
+    }
+
+    /**
+     * @return array
+     */
+    public function getPostData() {
+        return $this->postData;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getFormName()
     {
         return $this->formName;

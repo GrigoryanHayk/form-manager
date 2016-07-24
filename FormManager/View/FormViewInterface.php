@@ -7,8 +7,6 @@
  */
 namespace FormManager\View;
 
-use Safan\Safan;
-
 interface FormViewInterface {
 
 }

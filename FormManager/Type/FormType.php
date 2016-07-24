@@ -8,24 +8,26 @@
 namespace FormManager\Type;
 
 use FormManager\Builder\FormBuilderInterface;
-use FormManager\Exceptions\FormTypeNotFound;
+use FormManager\Exceptions\FormTypeNotFoundException;
 use FormManager\View\FormViewInterface;
-use Safan\Safan;
 
 abstract class FormType implements FormTypeInterface {
-
     /**
      * storage of formTypes
      * @var array
      */
     private $formTypes = [];
 
-
+    /**
+     * @param $type
+     * @param null $options
+     * @throws FormTypeNotFoundException
+     */
     public function setFormType($type, $options = null) {
         if(method_exists($type, 'getName'))
             $this->formTypes[$type->getName()] = $type;
         else
-            throw new FormTypeNotFound("The Form Type Class must implement 'getName' to return the name for mapping.");
+            throw new FormTypeNotFoundException("The Form Type Class must implement 'getName' to return the name for mapping.");
     }
     /**
      * Return the formType Object from storage
@@ -40,19 +42,33 @@ abstract class FormType implements FormTypeInterface {
                             $this->formTypes[$name] :
                             null;
     }
-    
+
+    /**
+     * @return string
+     */
     public function getName()
     {
         return 'form';
     }
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @return mixed
+     */
     public abstract function buildForm(FormBuilderInterface $builder);
 
+    /**
+     * @param FormViewInterface $formView
+     * @param $options
+     */
     public function buildView(FormViewInterface $formView, $options)
     {
         $formView->generateView($options);
     }
 
+    /**
+     * @return mixed
+     */
     public function count()
     {
         return count($this->formTypes);

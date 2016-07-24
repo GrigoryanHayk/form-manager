@@ -7,12 +7,13 @@
  */
 namespace FormManager\View\Helpers;
 
-use Safan\Safan;
-
-
 trait MainHelper {
 
-    //TODO::Implement row draw part dynamic for native attributes and for FormManager custom attributes
+    /**
+     * @param $row
+     * @param $rowName
+     * @return string
+     */
     public function getRow($row, $rowName) {
         $type  = (!is_null($row['type']) && strlen($row['type']) > 0) ? $row['type'] : static::DEFAULT_TYPE;
 
@@ -25,7 +26,6 @@ trait MainHelper {
         $html     = "";
         $options  = isset($row['options']) ? $row['options'] : [];
         $attrs    = (!empty($options) && isset($options['attr'])) ? $options['attr'] : [];
-
         $id       = (!empty($attrs) && isset($attrs['id'])) ? $attrs['id'] : $this->getFormName() . '_' . $rowName;
         $name     = (!empty($attrs) && isset($attrs['name'])) ? $attrs['name'] : $this->getFormName() . '[' . $rowName . ']';
         $required = (!empty($attrs) && isset($attrs['required'])) ? $attrs['required'] : false;
@@ -40,7 +40,6 @@ trait MainHelper {
             $html .= $labelField;
         }
 
-
         $html .= "<input type='". $type ."' ";
         foreach($attrs as $key => $attr) {
             $html .= $key . '="' . $attr . '" ';
@@ -52,11 +51,27 @@ trait MainHelper {
         if(!in_array(static::CRITERIA_NAME, $attrs, true)) {
             $html .= "name='". $name ."' ";
         }
+        if(!empty($this->getPostData()) && array_key_exists($rowName, $this->getPostData())) {
+            $html .= "value='".$this->getPostData()[$rowName]."' ";
+        }
         $html .= "/>";
+
+        if(!empty($this->getErrorMessages())) {
+            foreach($this->getErrorMessages() as $name => $content) {
+                if($name == $rowName) {
+                    $html .= '<span class="'.$id.'_error" style="color:#ff0000;font-size:0.9rem">'.$content['message'].'</span>';
+                }
+            }
+        }
 
         return $html;
     }
 
+    /**
+     * @param $row
+     * @param $rowName
+     * @return string
+     */
     private function getButton($row, $rowName) {
         $html     = "";
 
@@ -95,6 +110,11 @@ trait MainHelper {
         return $html;
     }
 
+    /**
+     * @param $row
+     * @param $rowName
+     * @return string
+     */
     private function getTextarea($row, $rowName) {
         $html = "";
 
@@ -125,19 +145,36 @@ trait MainHelper {
             $html .= "id='". $id ."' ";
         }
         if(!in_array(static::CRITERIA_NAME, $attrs, true)) {
-            $html .= "name='". $name ."' ";
+            $html .= "name='". $name ."' >";
         }
-        $html .= "></textarea>";
+        if(!empty($this->getPostData()) && array_key_exists($rowName, $this->getPostData())) {
+            $html .= $this->getPostData()[$rowName];
+        }
+        $html .= "</textarea>";
+
+        if(!empty($this->getErrorMessages())) {
+            foreach($this->getErrorMessages() as $name => $content) {
+                if($name == $rowName) {
+                    $html .= '<span class="'.$id.'_error" style="color:#ff0000;font-size:0.9rem">'.$content['message'].'</span>';
+                }
+            }
+        }
 
         return $html;
     }
 
+    /**
+     * @param $attr
+     */
     private function getRadio($attr) {
-
+        //TODO:: Implement radio button helper
     }
 
+    /**
+     * @param $attr
+     */
     private function getCheckbox($attr) {
-
+        //TODO:: Implement checkbox helper
     }
 
     

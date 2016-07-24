@@ -7,14 +7,23 @@
  */
 namespace FormManager\Type;
 
-use Safan\Safan;
-
 interface FormTypeInterface extends \Countable {
-
+    /**
+     * @param $type
+     * @param $options
+     * @return mixed
+     */
     public function setFormType($type, $options);
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function getFormType($name);
 
+    /**
+     * @return mixed
+     */
     public function count();
 
 }
