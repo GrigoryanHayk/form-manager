@@ -13,6 +13,6 @@
     ],
     "require": {
         "php": ">=5.4.0",
-		"safan-lab/safan": "1.*"
+	"safan-lab/safan": "1.*"
     }
 }
