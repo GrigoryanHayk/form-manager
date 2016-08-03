@@ -44,7 +44,7 @@ class FormValidation {
      */
     public function isValid($data) {
         if(empty($data))
-            return true;
+            return false;
 
         foreach($data as $fieldName => $item) {
             if(array_key_exists($fieldName, $this->getData())) {
