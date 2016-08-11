@@ -8,11 +8,13 @@
 namespace FormManager\View;
 
 use FormManager\Exceptions\FormNameNotFoundException;
-use FormManager\View\Helpers\MainHelper;
+use FormManager\View\Helpers\InputHelper;
+use FormManager\View\Helpers\TagHelper;
 
 class FormView implements FormViewInterface {
 
-    use MainHelper;
+    use InputHelper;
+    use TagHelper;
 
     const DEFAULT_TYPE      = 'text';
     const DEFAULT_ENCTYPE   = 'multipart/form-data';
@@ -26,6 +28,7 @@ class FormView implements FormViewInterface {
     const FIELD_SUBMIT      = 'submit';
     const FIELD_TEXTAREA    = 'textarea';
     const FIELD_BUTTON      = 'button';
+    const FIELD_SELECT      = 'select';
 
     const CRITERIA_ID       = 'id';
     const CRITERIA_NAME     = 'name';
