@@ -32,6 +32,7 @@ class FormView implements FormViewInterface {
     const CRITERIA_VALUE    = 'value';
     const CRITERIA_REQUIRED = 'required';
     const CRITERIA_DISABLED = 'disabled';
+    const CRITERIA_LABEL    = 'label';
 
     /**
      * @var array

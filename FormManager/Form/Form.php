@@ -45,7 +45,7 @@ class Form
         }
 
         $type->buildForm($this->factory->get('builder'));
-        $this->setValidation($this->factory->get('builder')); //TODO: implement validation
+        $this->setValidation($this->factory->get('builder'));
         $this->view = new FormView($this->formTypeName);
     }
 
@@ -99,7 +99,6 @@ class Form
      */
     public function row($rowName) {
         $row = $this->factory->get('builder')->get($rowName);
-
         return $this->view->getRow($row, $rowName);
     }
 
@@ -115,6 +114,12 @@ class Form
             $options = $builderData['options'];
             if(!isset($options['validation']))
                 continue;
+            /**
+             * Change for PHP 7, $optionsAttr = $options['attr'] ?? [];
+             */
+            $optionsAttr = $options['attr'] ? $options['attr'] : [];
+            if(isset($optionsAttr["name"]))
+                $key = $optionsAttr["name"];
             $validation = $builderData['options']['validation'];
             $validationData[$key] = $validation;
         }
